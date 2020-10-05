@@ -2,17 +2,17 @@ import ProductProps from "../../types/ProductProps"
 
 import * as types from "./types"
 
-export const addToCart = (item: ProductProps) => {
+export const addToCart = (item: string) => {
     return {
         type: types.ADD_TO_CART,
-        product: item
+        productId: item
     }
 }
 
 export const removeFromCart = (item: string) => {
     return {
         type: types.REMOVE_FROM_CART,
-        product: item
+        productId: item
     }
 }
 

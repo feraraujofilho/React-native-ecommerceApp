@@ -15,11 +15,11 @@ const productReducer = (state = initialState, action: CartTypes) => {
         case ADD_TO_CART:
             return {
                 ...state,
-                cart: [...state.cart, action.product]
+                cart: [...state.cart, action.productId]
             }
         case REMOVE_FROM_CART:
             const { cart } = state
-            const indexOfProduct = cart.indexOf(action.product)
+            const indexOfProduct = cart.findIndex(product => product.id === action.productId)
             const newCart = [...state.cart].splice(indexOfProduct, 1)
             return {
                 ...state,

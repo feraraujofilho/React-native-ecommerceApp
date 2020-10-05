@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 const OrdersScreen: FC = () => {
     return <View style={styles.main}>
-        <Text>{`${OrdersScreen}`}</Text>
+        <Text>Orders Screen</Text>
     </View>
 };
 
