@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { FlatList, Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import PRODUCTS from "../data/dummy-data-products"
-import { Card, Content } from "native-base";
+import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useSelector } from "react-redux";
+import StateInterface from "../store/statetypes";
 
 
 interface ShopScreenProps {
@@ -9,6 +9,7 @@ interface ShopScreenProps {
 }
 
 const ShopScreen: FC<ShopScreenProps> = (props) => {
+    const allProducts = useSelector((state: StateInterface) => state.productState.products)
 
     const renderProductCard = (itemData: any) => {
         return (
@@ -32,7 +33,7 @@ const ShopScreen: FC<ShopScreenProps> = (props) => {
             <Text style={styles.header}>Best Products</Text>
             <View style={styles.line} />
         </View>
-        <FlatList keyExtractor={(item) => item.id} data={PRODUCTS} renderItem={renderProductCard} numColumns={2} />
+        <FlatList keyExtractor={(item) => item.id} data={allProducts} renderItem={renderProductCard} numColumns={2} />
     </SafeAreaView>
 };
 
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     },
     lineContainer: {
         flexDirection: 'row',
-        marginTop: 60,
+        marginTop: 30,
         marginBottom: 10
     }
 

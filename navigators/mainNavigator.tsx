@@ -19,7 +19,6 @@ const MainNavigator = () => {
     return (<NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen name="Shop" component={DrawerNavigation} options={({ navigation }) => ({
-                headerTransparent: true,
                 headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton} >
                     <Item title="Menu" color={Colors.primaryColor} iconName="ios-menu" onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}></Item>
                 </HeaderButtons>,
