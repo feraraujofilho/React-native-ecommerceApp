@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
+import ProductCardShop from "../components/ProductCardShop";
 import StateInterface from "../store/statetypes";
 
 
@@ -13,17 +14,8 @@ const ShopScreen: FC<ShopScreenProps> = (props) => {
 
     const renderProductCard = (itemData: any) => {
         return (
-            <View style={styles.gridItem}>
-                <TouchableOpacity onPress={() => props.navigation.navigate("Product", {
-                    productId: itemData.item.id
-                }
-                )}>
-                    <Image source={{ uri: itemData.item.imageUrl }} style={styles.bgImage} />
-                    <Text numberOfLines={2} style={styles.text}>{itemData.item.title}</Text>
-                </TouchableOpacity>
-            </View>
+            <ProductCardShop item={itemData.item} navigation={props.navigation} />
         )
-
     }
 
 
@@ -43,34 +35,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#f3f1f4",
         alignItems: "center"
     },
-    gridItem: {
-        marginVertical: 15,
-        marginHorizontal: 15,
-        height: 150,
-        width: 150,
-        backgroundColor: "#fff",
-        borderRadius: 10,
-        alignItems: "center",
-        justifyContent: "center",
-        shadowColor: "black",
-        shadowOpacity: 0.1,
-        shadowOffset: { width: 0, height: 1 },
-        shadowRadius: 8,
-    },
-    bgImage: {
-        width: 100,
-        height: 100,
-    },
     productBox: {
         borderBottomStartRadius: 10,
         borderBottomEndRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 5
-    },
-    text: {
-        fontFamily: "Roboto",
-        textAlign: "center",
-        paddingHorizontal: 10
     },
     line: {
         backgroundColor: '#a2a5b0',

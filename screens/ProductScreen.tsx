@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux"
 import StateInterface from "../store/statetypes";
 import { addToCart } from "../store/cart/actions";
 import { Button } from "native-base";
-import ParagraphText from "../components/paragraphText";
+import ParagraphText from "../components/ParagraphText";
 import { ScrollView } from "react-native-gesture-handler";
+import Colors from "../constants/Colors";
 
 
 
@@ -18,13 +19,19 @@ interface ProductScreenProps {
 const ProductScreen = ({ route, navigation }) => {
 
     const { productId } = route.params
+    const cartProductsIds = useSelector((state: StateInterface) => state.productState.cart)
     const allProducts = useSelector((state: StateInterface) => state.productState.products)
     const product = allProducts.find((product: ProductProps) => product.id === productId)
+
+    const isProductAlreadyInCart = cartProductsIds.map(product => product.id).includes(product?.id)
 
     const dispatch = useDispatch()
 
     const addProductToCart = () => {
-        dispatch(addToCart(productId))
+        dispatch(addToCart({
+            id: productId,
+            quantity: 1
+        }))
     }
 
     if (!product) {
@@ -46,7 +53,7 @@ const ProductScreen = ({ route, navigation }) => {
 
                 <View style={styles.priceAndAction}>
                     <ParagraphText style={styles.price}>${product.price}</ParagraphText>
-                    <Button rounded style={{ backgroundColor: "#d56235", paddingHorizontal: 20 }} onPress={addProductToCart}><Text style={{ color: "white" }}>Add To Cart</Text></Button>
+                    <Button disabled={isProductAlreadyInCart} rounded style={{ backgroundColor: isProductAlreadyInCart ? Colors.accentColor : Colors.primaryColor, paddingHorizontal: 20 }} onPress={addProductToCart}><Text style={{ color: "white" }}>{isProductAlreadyInCart ? "Product added to cart" : "Add To Cart"}</Text></Button>
                 </View>
             </View>
 
@@ -71,6 +78,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowOffset: { width: 0, height: 1 },
         shadowRadius: 8,
+        elevation: 5,
     },
     titleAndDescription: {
         flexDirection: "row",

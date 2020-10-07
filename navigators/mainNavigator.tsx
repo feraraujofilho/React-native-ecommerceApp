@@ -2,7 +2,7 @@ import React from "react"
 import { DrawerActions, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/headerButton";
+import CustomHeaderButton from "../components/HeaderButton";
 import CartScreen from "../screens/CartScreen";
 import CustomerInfoScreen from "../screens/CustomerInfoScreen";
 import OrdersScreen from "../screens/OrdersScreen";
@@ -12,6 +12,7 @@ import UserProductsScreen from "../screens/UserProductsScreen";
 import UserSingleProductScreen from "../screens/UserSingleProductScreen";
 import DrawerNavigation from "./drawerNavigation";
 import Colors from "../constants/Colors";
+import { Image } from "react-native";
 
 const Stack = createStackNavigator()
 
@@ -19,6 +20,7 @@ const MainNavigator = () => {
     return (<NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen name="Shop" component={DrawerNavigation} options={({ navigation }) => ({
+                headerTitle: () => <Image style={{ width: 100, height: 28 }} source={require("../assets/Logo-black.png")} />,
                 headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton} >
                     <Item title="Menu" color={Colors.primaryColor} iconName="ios-menu" onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}></Item>
                 </HeaderButtons>,
@@ -35,7 +37,11 @@ const MainNavigator = () => {
                     <Item color={Colors.primaryColor} title="Cart" iconName="ios-cart" onPress={() => navigation.navigate("Cart")} />
                 </HeaderButtons>
             })} />
-            <Stack.Screen name="Cart" component={CartScreen} />
+            <Stack.Screen name="Cart" component={CartScreen} options={{
+                headerTintColor: Colors.primaryColor,
+                headerTitle: () => <Image style={{ width: 100, height: 28 }} source={require("../assets/Logo-black.png")} />,
+                headerBackTitleVisible: false,
+            }} />
             <Stack.Screen name="CustomerInfo" component={CustomerInfoScreen} />
             <Stack.Screen name="PaymentConfirmation" component={PaymentConfirmationScreen} />
             <Stack.Screen name="UserProducts" component={UserProductsScreen} />

@@ -2,10 +2,10 @@ import ProductProps from "../../types/ProductProps"
 
 import * as types from "./types"
 
-export const addToCart = (item: string) => {
+export const addToCart = (item: types.ProductDetails) => {
     return {
         type: types.ADD_TO_CART,
-        productId: item
+        productDetails: item
     }
 }
 

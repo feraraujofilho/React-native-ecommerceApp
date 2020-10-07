@@ -1,12 +1,8 @@
 import React from "react"
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
 import CartScreen from '../screens/CartScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import ShopScreen from '../screens/ShopScreen';
-import { Ionicons } from "@expo/vector-icons"
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import CustomHeaderButton from "../components/headerButton";
 
 
 

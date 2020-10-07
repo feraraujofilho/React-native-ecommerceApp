@@ -2,7 +2,7 @@ import ProductProps from "../types/ProductProps";
 
 export interface State {
     products: [ProductProps],
-    cart: [ProductProps],
+    cart: [string],
     order: [any],
     myProducts: [ProductProps]
 }
