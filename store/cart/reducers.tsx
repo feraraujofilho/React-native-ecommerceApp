@@ -7,10 +7,9 @@ const initialState: ProductState = {
     products: PRODUCTS,
     cart: [],
     orders: [],
-    myProducts: []
 }
 
-const productReducer = (state = initialState, action: CartTypes) => {
+const cartReducer = (state = initialState, action: CartTypes) => {
     switch (action.type) {
         case ADD_TO_CART:
             return {
@@ -33,4 +32,4 @@ const productReducer = (state = initialState, action: CartTypes) => {
     }
 }
 
-export default productReducer
+export default cartReducer

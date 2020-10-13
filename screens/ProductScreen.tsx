@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import ProductProps from "../types/ProductProps";
 import { useDispatch, useSelector } from "react-redux"
@@ -7,7 +7,6 @@ import StateInterface from "../store/statetypes";
 import { addToCart } from "../store/cart/actions";
 import { Button } from "native-base";
 import ParagraphText from "../components/ParagraphText";
-import { ScrollView } from "react-native-gesture-handler";
 import Colors from "../constants/Colors";
 
 
@@ -16,7 +15,7 @@ interface ProductScreenProps {
     navigation: StackNavigationProp<any>,
 }
 
-const ProductScreen = ({ route, navigation }) => {
+const ProductScreen: FC = ({ route, navigation }) => {
 
     const { productId } = route.params
     const cartProductsIds = useSelector((state: StateInterface) => state.productState.cart)

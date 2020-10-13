@@ -1,9 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const PaymentConfirmationScreen: FC = () => {
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        
+    },[])
+
     return <View style={styles.main}>
-        <Text>{`${PaymentConfirmationScreen}`}</Text>
+        <Text>Payment Confirmation</Text>
     </View>
 };
 

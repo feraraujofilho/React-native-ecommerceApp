@@ -1,3 +1,4 @@
+import { NavigationProp } from "@react-navigation/native";
 import { Button } from "native-base";
 import React, { FC } from "react";
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
@@ -8,7 +9,8 @@ import { removeFromCart } from "../store/cart/actions";
 import StateInterface from "../store/statetypes";
 import ProductProps from "../types/ProductProps";
 
-const CartScreen: FC = () => {
+
+const CartScreen: FC = ({navigation}) => {
     const cartProducts = useSelector((state: StateInterface) => state.productState.cart)
     const allProduct = useSelector((state: StateInterface) => state.productState.products)
 
@@ -53,7 +55,7 @@ const CartScreen: FC = () => {
                 }, 0).toFixed(2)}</Text>
             </View>
         </View>
-        <Button rounded style={{ backgroundColor: "#d56235", paddingHorizontal: 20, width: "90%", alignSelf: "center" }} onPress={() => { }}><Text style={{ color: "white", width: "100%", textAlign: "center" }}>Add To Cart</Text></Button>
+        <Button rounded style={styles.button} onPress={() => {navigation.navigate("PaymentConfirmation") }}><Text style={{ color: "white", width: "100%", textAlign: "center" }}>Buy Now</Text></Button>
     </ScrollView >
 };
 
@@ -70,6 +72,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
+    button: { backgroundColor: "#d56235", paddingHorizontal: 20, width: "90%", alignSelf: "center" }
 })
 
 export default CartScreen;

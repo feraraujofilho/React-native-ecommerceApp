@@ -12,7 +12,8 @@ import UserProductsScreen from "../screens/UserProductsScreen";
 import UserSingleProductScreen from "../screens/UserSingleProductScreen";
 import DrawerNavigation from "./drawerNavigation";
 import Colors from "../constants/Colors";
-import { Image } from "react-native";
+import { Image, Platform} from "react-native";
+import ParagraphText from "../components/ParagraphText";
 
 const Stack = createStackNavigator()
 
@@ -45,7 +46,26 @@ const MainNavigator = () => {
             <Stack.Screen name="CustomerInfo" component={CustomerInfoScreen} />
             <Stack.Screen name="PaymentConfirmation" component={PaymentConfirmationScreen} />
             <Stack.Screen name="UserProducts" component={UserProductsScreen} />
-            <Stack.Screen name="UserSingleProduct" component={UserSingleProductScreen} />
+            <Stack.Screen name="UserSingleProduct" options={({navigation, route}) => ({
+                headerTintColor: Colors.primaryColor,
+                headerBackTitleVisible: false,
+                headerTitle: () => <ParagraphText>{route.params?.productId
+                ? 'Edit Product'
+                : 'Add Product'}</ParagraphText>,
+                headerRight: () => (
+                <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                  <Item
+                    title="Save"
+                    iconName={
+                      Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'
+                    }
+                    onPress={route.params?.submitFn}
+                  />
+                </HeaderButtons>
+              )
+            }
+                
+            )} component={UserSingleProductScreen} />
             <Stack.Screen name="Orders" component={OrdersScreen} />
         </Stack.Navigator>
     </NavigationContainer>)

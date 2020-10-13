@@ -1,6 +1,10 @@
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import productReducer from "./cart/reducers";
+import cartReducer from "./cart/reducers";
 import rootReducer from "./rootReducer";
+import ReduxThunk from "redux-thunk"
 
-export const store = createStore(rootReducer, composeWithDevTools())
+const middleWares = [ReduxThunk]
+const middlewaresEnhancer = applyMiddleware(...middleWares)
+
+export const store = createStore(rootReducer, composeWithDevTools(middlewaresEnhancer))

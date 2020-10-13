@@ -1,9 +1,9 @@
 export default interface ProductProps {
     id: string,
-    userId: string,
+    userId?: string,
     title: string,
     description: string,
     imageUrl: string,
-    bannerImgUrl: string,
+    bannerImgUrl?: string,
     price: number
 }

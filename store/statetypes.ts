@@ -1,13 +1,17 @@
 import ProductProps from "../types/ProductProps";
 
-export interface State {
+export interface ProductState {
     products: [ProductProps],
     cart: [string],
     order: [any],
-    myProducts: [ProductProps]
+}
+
+export interface UserProductState {
+    userProducts: [ProductProps]
 }
 
 export default interface StateInterface {
-    productState: State
+    productState: ProductState,
+    userProductsState: UserProductState
 }
 
