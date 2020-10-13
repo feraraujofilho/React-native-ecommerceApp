@@ -59,7 +59,7 @@ const MainNavigator = () => {
                     iconName={
                       Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'
                     }
-                    onPress={route.params?.submitFn}
+                    onPress={route.params?.submit}
                   />
                 </HeaderButtons>
               )

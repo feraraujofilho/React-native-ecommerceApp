@@ -26,6 +26,7 @@ const UserProductsScreen: FC<UserProductsScreenProps> = ({navigation}) => {
 
     return <SafeAreaView style={styles.main}>
         <FlatList keyExtractor={(item) => item.id} data={userProducts} renderItem={renderSingleProduct} numColumns={1} />
+        <ActionButton onPress={() => navigation.navigate("UserSingleProduct")}>Create Product</ActionButton>
     </SafeAreaView>
 };
 

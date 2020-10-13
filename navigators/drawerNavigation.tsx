@@ -11,7 +11,7 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigation() {
     return (
-        <Drawer.Navigator initialRouteName="Shop">
+        <Drawer.Navigator>
             <Drawer.Screen name="Shop" component={ShopScreen} />
             <Drawer.Screen name="Cart" component={CartScreen} />
             <Drawer.Screen name="Orders" component={OrdersScreen} />

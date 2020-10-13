@@ -93,6 +93,7 @@ const EditProductScreen = ({route, navigation}) => {
 
   useEffect(() => {
     navigation.setParams({ submit: submitHandler });
+    console.log(route.params)
   }, [submitHandler]);
 
   const inputChangeHandler = useCallback(
