@@ -27,7 +27,7 @@ const CartScreen: FC = ({navigation}) => {
 
     const renderItem = (itemData: any) => {
         const { item } = itemData
-        return <CartItem item={item} removeFromCart={removeProductFromCart} />
+        return <CartItem item={item} removeFunction={removeProductFromCart} />
     }
 
     if (productsInTheCart.length === 0) {

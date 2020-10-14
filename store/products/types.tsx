@@ -5,7 +5,8 @@ export interface ProductCreationInterface {
     title: string,
     description: string,
     price: number,
-    imageUrl: string
+    imageUrl: string,
+    bannerImgUrl?: string
 }
 
 export interface createProduct {

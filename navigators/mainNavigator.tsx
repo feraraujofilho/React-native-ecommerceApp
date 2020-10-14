@@ -9,7 +9,7 @@ import OrdersScreen from "../screens/OrdersScreen";
 import PaymentConfirmationScreen from "../screens/PaymentConfirmationScreen";
 import ProductScreen from "../screens/ProductScreen";
 import UserProductsScreen from "../screens/UserProductsScreen";
-import UserSingleProductScreen from "../screens/UserSingleProductScreen";
+import UserSingleProductScreen from "../screens/EditProductScreen";
 import DrawerNavigation from "./drawerNavigation";
 import Colors from "../constants/Colors";
 import { Image, Platform} from "react-native";
