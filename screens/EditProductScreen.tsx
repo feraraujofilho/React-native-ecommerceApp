@@ -44,7 +44,6 @@ const formReducer = (state, action) => {
 
 const EditProductScreen = ({ route, navigation }) => {
 	const prodId = route.params?.productId
-	console.log('IDDDD', prodId)
 
 	const editedProduct = useSelector((state: StateInterface) =>
 		state.userProductsState.userProducts.find((prod) => prod.id === prodId)

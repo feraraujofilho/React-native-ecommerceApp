@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import ActionButton from '../components/ActionButton'
-import CartItem from '../components/CartItem'
+import CartItem from '../components/CartItem/CartItem'
 import StateInterface from '../store/statetypes'
 
 interface UserProductsScreenProps {

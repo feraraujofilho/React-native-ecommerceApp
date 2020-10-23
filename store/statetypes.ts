@@ -1,8 +1,9 @@
+import CartItemInterface from "../types/CartItemInterface";
 import ProductProps from "../types/ProductProps";
 
 export interface ProductState {
     products: [ProductProps],
-    cart: [string],
+    cart: [CartItemInterface],
     order: [any],
 }
 
