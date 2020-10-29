@@ -1,64 +1,76 @@
-import React, { FC } from "react";
-import { FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useSelector } from "react-redux";
-import ProductCardShop from "../components/ProductCardShop";
-import StateInterface from "../store/statetypes";
-
+import React, { FC } from 'react'
+import { useQuery } from 'react-apollo'
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { useSelector } from 'react-redux'
+import ProductCardShop from '../components/ProductCardShop'
+import StateInterface from '../store/statetypes'
+import { FIRST_PRODUCTS } from '../apollo/queries/queries'
 
 interface ShopScreenProps {
-    navigation: any
+	navigation: any
 }
 
 const ShopScreen: FC<ShopScreenProps> = (props) => {
-    const allProducts = useSelector((state: StateInterface) => state.productState.products)
+	const { data, error } = useQuery(FIRST_PRODUCTS)
 
-    const renderProductCard = (itemData: any) => {
-        return (
-            <ProductCardShop item={itemData.item} navigation={props.navigation} />
-        )
-    }
+	const allProductsFromApi = data?.products?.edges
 
+	const allProducts = useSelector(
+		(state: StateInterface) => state.productState.products
+	)
 
-    return <SafeAreaView style={styles.main}>
-        <View style={styles.lineContainer}>
-            <View style={styles.line} />
-            <Text style={styles.header}>Best Products</Text>
-            <View style={styles.line} />
-        </View>
-        <FlatList keyExtractor={(item) => item.id} data={allProducts} renderItem={renderProductCard} numColumns={2} />
-    </SafeAreaView>
-};
+	const renderProductCard = (itemData: any) => {
+		return (
+			<ProductCardShop item={itemData.item} navigation={props.navigation} />
+		)
+	}
+
+	return (
+		<SafeAreaView style={styles.main}>
+			<View style={styles.lineContainer}>
+				<View style={styles.line} />
+				<Text style={styles.header}>Best Products</Text>
+				<View style={styles.line} />
+			</View>
+			<FlatList
+				showsVerticalScrollIndicator={false}
+				keyExtractor={(item) => item.id}
+				data={allProductsFromApi}
+				renderItem={renderProductCard}
+				numColumns={2}
+			/>
+		</SafeAreaView>
+	)
+}
 
 const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-        backgroundColor: "#f3f1f4",
-        alignItems: "center"
-    },
-    productBox: {
-        borderBottomStartRadius: 10,
-        borderBottomEndRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 5
-    },
-    line: {
-        backgroundColor: '#a2a5b0',
-        height: 0.5,
-        width: "20%",
-        alignSelf: 'center',
-        marginHorizontal: 10
-    },
-    header: {
-        color: "#a2a5b0",
-        fontFamily: "Roboto"
-    },
-    lineContainer: {
-        flexDirection: 'row',
-        marginTop: 30,
-        marginBottom: 10
-    }
-
-
+	main: {
+		flex: 1,
+		backgroundColor: '#f3f1f4',
+		alignItems: 'center',
+	},
+	productBox: {
+		borderBottomStartRadius: 10,
+		borderBottomEndRadius: 10,
+		paddingVertical: 10,
+		paddingHorizontal: 5,
+	},
+	line: {
+		backgroundColor: '#a2a5b0',
+		height: 0.5,
+		width: '20%',
+		alignSelf: 'center',
+		marginHorizontal: 10,
+	},
+	header: {
+		color: '#a2a5b0',
+		fontFamily: 'Roboto',
+	},
+	lineContainer: {
+		flexDirection: 'row',
+		marginTop: 30,
+		marginBottom: 10,
+	},
 })
 
-export default ShopScreen;
+export default ShopScreen

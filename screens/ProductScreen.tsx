@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import ProductProps from '../types/ProductProps'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,6 +8,8 @@ import { addToCart } from '../store/cart/actions'
 import { Button } from 'native-base'
 import ParagraphText from '../components/ParagraphText'
 import Colors from '../constants/Colors'
+import { useQuery } from 'react-apollo'
+import { SINGLE_PRODUCT } from '../apollo/queries/queries'
 
 interface ProductScreenProps {
 	navigation: StackNavigationProp<any>
@@ -15,6 +17,15 @@ interface ProductScreenProps {
 
 const ProductScreen: FC = ({ route, navigation }) => {
 	const { productId } = route.params
+	const { data, error, loading } = useQuery(SINGLE_PRODUCT, {
+		variables: {
+			id: productId,
+		},
+	})
+
+	const productFromApi = data?.node
+
+
 	const cartProductsIds = useSelector(
 		(state: StateInterface) => state.productState.cart
 	)
@@ -40,34 +51,36 @@ const ProductScreen: FC = ({ route, navigation }) => {
 		)
 	}
 
-	if (!product) {
-		return (
-			<View style={styles.errorMessage}>
-				<Text>Product Not Found</Text>
-			</View>
-		)
+	if (loading) {
+		return <ActivityIndicator size={35} color={Colors.primaryColor} />
 	}
 
 	return (
 		<View style={styles.main}>
 			<Image
-				source={{ uri: product.bannerImgUrl }}
+				source={{
+					uri: productFromApi.images.edges[1].node.originalSrc,
+				}}
 				style={{ height: '80%', width: '100%', marginBottom: -120 }}
 			/>
 			<View style={styles.infoContainer}>
 				<View style={styles.titleAndDescription}>
 					<View style={{ width: '70%' }}>
-						<Text style={styles.title}>{product.title}</Text>
-						<ParagraphText>{product.description}</ParagraphText>
+						<Text style={styles.title}>{productFromApi.title}</Text>
+						<ParagraphText style={{ width: '140%' }}>
+							{productFromApi.description.slice(0, 100)}...
+						</ParagraphText>
 					</View>
 					<Image
-						source={{ uri: product.imageUrl }}
+						source={{ uri: productFromApi.images.edges[0].node.originalSrc }}
 						style={{ width: 80, height: 80 }}
 					/>
 				</View>
 
 				<View style={styles.priceAndAction}>
-					<ParagraphText style={styles.price}>${product.price}</ParagraphText>
+					<ParagraphText style={styles.price}>
+						${productFromApi.variants.edges[0].node.price}
+					</ParagraphText>
 					{isProductAlreadyInCart ? (
 						<View style={{ alignItems: 'center' }}>
 							<Button

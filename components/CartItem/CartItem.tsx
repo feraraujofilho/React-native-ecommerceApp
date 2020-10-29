@@ -16,7 +16,6 @@ import CartItemInterface from '../../types/CartItemInterface'
 import ParagraphText from '../ParagraphText'
 import CartItemProps from './CartItemProps'
 
-
 const CartItem: FC<CartItemProps> = ({
 	navigation,
 	item,
@@ -45,7 +44,12 @@ const CartItem: FC<CartItemProps> = ({
 					<ParagraphText style={styles.price}>$ {item.price}</ParagraphText>
 				</View>
 			</View>
-			<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+				}}
+			>
 				{!myProducts && (
 					<View style={styles.qtyContainer}>
 						<Button
@@ -120,6 +124,8 @@ const styles = StyleSheet.create({
 	qtyContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		width: 80,
+		justifyContent: 'space-between',
 	},
 	action: {
 		flexDirection: 'row',
